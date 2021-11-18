@@ -116,7 +116,7 @@ def prepDecoder(path_name,normalize_flag=True):
     sessionData: a list of session data where each session is a list of 2 matrices
     '''
     #collect only the files names with the .mat extension
-    file_names=glob.glob(path.join(path_dir,'*.mat'))
+    file_names=glob.glob(path.join(path_name,'*.mat'))
     #instantiate object for scaling all data to 0 to 1
     scaler=preprocessing.MinMaxScaler()
     #initialize a list for the lists
