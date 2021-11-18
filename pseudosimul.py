@@ -5,6 +5,7 @@ rng = default_rng(12345)
 from sklearn import svm
 from os import path
 import os
+import glob
 import scipy.io as sio #to load matlab files
 #package for imbalanced learning
 from imblearn import over_sampling, under_sampling
@@ -114,10 +115,8 @@ def prepDecoder(path_name,normalize_flag=True):
     OUTPUT
     sessionData: a list of session data where each session is a list of 2 matrices
     '''
-    #get the list of files in the folder
-    file_names=os.listdir(path_name)
-    #write the directory for each file
-    file_names=[path.join(path_name,f) for f in file_names]
+    #collect only the files names with the .mat extension
+    file_names=glob.glob(path.join(path_dir,'*.mat'))
     #instantiate object for scaling all data to 0 to 1
     scaler=preprocessing.MinMaxScaler()
     #initialize a list for the lists
