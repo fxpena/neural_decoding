@@ -28,7 +28,7 @@ def decode(session_data,n_iter,nTrialsTrain,training_flag=False,shuffle_flag=Fal
     '''
     
     allow_balancing = True
-    proportion4test = 0.45
+    proportion4test = 0.3
     #make the # of trials in the training and testing sets the same
     #this parameter applies to the positive class and the negative class separately
     nTrialsTest = nTrialsTrain
@@ -42,16 +42,6 @@ def decode(session_data,n_iter,nTrialsTrain,training_flag=False,shuffle_flag=Fal
         test=[]
         train_shuf=[]
         test_shuf=[]
-        # data={
-        #     'X_train': [],
-        #     'X_test': [],
-        #     'y_train': [],
-        #     'y_test': []}
-        # shuffled_data={
-        #     'X_train': [],
-        #     'X_test': [],
-        #     'y_train': [],
-        #     'y_test': []}
         for session in session_data:
             Xpos = session[0]
             Xneg = session[1]
@@ -90,7 +80,7 @@ def decode(session_data,n_iter,nTrialsTrain,training_flag=False,shuffle_flag=Fal
         testLabels = np.full((len(test),),False)
         testLabels[:nTrialsTest] = True
         #train an SVM
-        SVM=svm.LinearSVC(fit_intercept=False,max_iter=5000)
+        SVM=svm.LinearSVC()
         SVM = SVM.fit(train,trainingLabels)
         #test the model on the held out data and calculate accuracy
         accuracy[j] = SVM.score(test,testLabels)
